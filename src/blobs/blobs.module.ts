@@ -1,6 +1,6 @@
 import { Module } from '@nestjs/common';
-import { BlobsController } from './blobs.controller';
-import { BlobsService } from './blobs.service';
+import { BlobsController } from './blobs.controller.js';
+import { BlobsService } from './blobs.service.js';
 
 @Module({
   imports: [],

@@ -1,7 +1,7 @@
 import { Injectable, Logger } from '@nestjs/common';
 import { v4 as uuidv4 } from 'uuid';
 import { readFile, writeFile } from 'node:fs/promises';
-import { BlobValueDto } from './BlobValueDto.dto';
+import { BlobValueDto } from './BlobValueDto.dto.js';
 
 @Injectable()
 export class BlobsService {

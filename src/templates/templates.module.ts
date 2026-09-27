@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { TemplatesController } from './templates.controller';
-import { TemplatesService } from './templates.service';
-import { BlobsModule } from 'src/blobs/blobs.module';
+import { TemplatesController } from './templates.controller.js';
+import { TemplatesService } from './templates.service.js';
+import { BlobsModule } from '../blobs/blobs.module.js';
 
 @Module({
   imports: [BlobsModule],

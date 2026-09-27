@@ -1,8 +1,8 @@
 import { NestFactory } from '@nestjs/core';
 import { SwaggerModule, DocumentBuilder } from '@nestjs/swagger';
-import { LoggingInterceptor } from './logging.interceptor';
+import { LoggingInterceptor } from './logging.interceptor.js';
 import { ConsoleLogger } from '@nestjs/common';
-import { AppModule } from './app.module';
+import { AppModule } from './app.module.js';
 
 async function bootstrap() {
   const logger = new ConsoleLogger();
@@ -20,4 +20,4 @@ async function bootstrap() {
   await app.listen(3001);
   logger.log(`Application running at ${await app.getUrl()}`);
 }
-void bootstrap();
+await bootstrap();

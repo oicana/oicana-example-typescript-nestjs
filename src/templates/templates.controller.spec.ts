@@ -1,8 +1,8 @@
 import { Test, TestingModule } from '@nestjs/testing';
-import { TemplatesController } from './templates.controller';
-import { TemplatesService } from './templates.service';
-import { BlobsModule } from 'src/blobs/blobs.module';
-import { Response } from 'express';
+import { TemplatesController } from './templates.controller.js';
+import { TemplatesService } from './templates.service.js';
+import { BlobsModule } from '../blobs/blobs.module.js';
+import type { Response } from 'express';
 
 describe('TemplatesController', () => {
   let templatesController: TemplatesController;
@@ -22,7 +22,7 @@ describe('TemplatesController', () => {
   describe('getTemplates', () => {
     it('should return an array of template IDs', () => {
       const mockResponse = {
-        send: jest.fn(),
+        send: vi.fn(),
       } as unknown as Response;
 
       templatesController.getTemplates(mockResponse);

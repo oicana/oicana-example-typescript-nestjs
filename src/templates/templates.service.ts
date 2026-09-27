@@ -1,17 +1,11 @@
 import { Injectable, Logger } from '@nestjs/common';
-import {
-  BlobWithMetadata,
-  CompilationMode,
-  Pdf,
-  Png,
-  Template,
-} from '@oicana/node';
+import { type BlobInput, CompilationMode, Template } from '@oicana/node';
 import { promises as fs } from 'fs';
 import { join } from 'path';
-import { BlobsService } from 'src/blobs/blobs.service';
-import { CompilationDto } from './CompilationDto.dto';
+import { BlobsService } from '../blobs/blobs.service.js';
+import { CompilationDto } from './CompilationDto.dto.js';
 import { err, ok, Result } from 'neverthrow';
-import { ServiceError } from 'src/serviceError';
+import { ServiceError } from '../serviceError.js';
 
 @Injectable()
 export class TemplatesService {
@@ -38,8 +32,7 @@ export class TemplatesService {
   async registerAllTemplates(templates: string[][]) {
     for (const [templateId, version] of templates) {
       const fullPath = join(
-        process.cwd(),
-        'templates',
+        import.meta.dirname,
         `${templateId}-${version}.zip`,
       );
       const buffer = await fs.readFile(fullPath);
@@ -66,10 +59,9 @@ export class TemplatesService {
 
     const [jsonInputs, blobInputs] = await this.prepareInputs(options);
     try {
-      const result = template.export(
+      const result = await template.exportPdfAsync(
         jsonInputs,
         blobInputs,
-        Pdf,
         CompilationMode.Production,
       );
       return ok(result);
@@ -101,11 +93,11 @@ export class TemplatesService {
 
     const [jsonInputs, blobInputs] = await this.prepareInputs(options);
     try {
-      const result = template.export(
+      const result = await template.exportPngAsync(
         jsonInputs,
         blobInputs,
-        Png(1.0),
         CompilationMode.Development,
+        1.0,
       );
       return ok(result);
     } catch (compilationException: unknown) {
@@ -140,14 +132,14 @@ export class TemplatesService {
     if (!templateIds.includes(templateId)) {
       return null;
     }
-    return join(process.cwd(), 'templates', `${templateId}-0.1.0.zip`);
+    return join(import.meta.dirname, `${templateId}-0.1.0.zip`);
   }
 
   private async prepareInputs(
     options: CompilationDto,
-  ): Promise<[Map<string, string>, Map<string, BlobWithMetadata>]> {
+  ): Promise<[Map<string, string>, Map<string, BlobInput>]> {
     const jsonInputs = new Map<string, string>();
-    const blobInputs = new Map<string, BlobWithMetadata>();
+    const blobInputs = new Map<string, BlobInput>();
 
     for (const jsonInputValue of options.jsonInputs) {
       jsonInputs.set(jsonInputValue.key, JSON.stringify(jsonInputValue.value));
@@ -156,7 +148,7 @@ export class TemplatesService {
     for (const blobInputValue of options.blobInputs) {
       const file = await this.blobsService.read(blobInputValue.blobId);
       if (file === undefined) continue;
-      blobInputs.set(blobInputValue.key, { bytes: file });
+      blobInputs.set(blobInputValue.key, { data: file });
     }
 
     return [jsonInputs, blobInputs];

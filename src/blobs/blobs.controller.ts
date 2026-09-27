@@ -4,7 +4,7 @@ import {
   UploadedFile,
   UseInterceptors,
 } from '@nestjs/common';
-import { BlobsService } from './blobs.service';
+import { BlobsService } from './blobs.service.js';
 import { FileInterceptor } from '@nestjs/platform-express';
 import {
   ApiBody,
@@ -13,8 +13,8 @@ import {
   ApiOperation,
   ApiResponse,
 } from '@nestjs/swagger';
-import { FileUploadDto } from './FileUploadDto.dto';
-import { BlobValueDto } from './BlobValueDto.dto';
+import { FileUploadDto } from './FileUploadDto.dto.js';
+import { BlobValueDto } from './BlobValueDto.dto.js';
 
 @Controller('blobs')
 export class BlobsController {

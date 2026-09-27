@@ -1,8 +1,8 @@
 import { Body, Controller, Get, Param, Post, Res } from '@nestjs/common';
-import { Response } from 'express';
-import { TemplatesService } from './templates.service';
+import type { Response } from 'express';
+import { TemplatesService } from './templates.service.js';
 import { ApiBody, ApiOperation, ApiParam, ApiResponse } from '@nestjs/swagger';
-import { CompilationDto } from './CompilationDto.dto';
+import { CompilationDto } from './CompilationDto.dto.js';
 
 @Controller('templates')
 export class TemplatesController {

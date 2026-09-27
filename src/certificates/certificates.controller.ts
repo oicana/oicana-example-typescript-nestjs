@@ -1,8 +1,8 @@
 import { Body, Controller, Post, Res } from '@nestjs/common';
-import { Response } from 'express';
+import type { Response } from 'express';
 import { ApiBody, ApiOperation, ApiResponse } from '@nestjs/swagger';
-import { CertificatesService } from './certificates.service';
-import { CreateCertificateDto } from './CreateCertificateDto.dto';
+import { CertificatesService } from './certificates.service.js';
+import { CreateCertificateDto } from './CreateCertificateDto.dto.js';
 
 @Controller('certificates')
 export class CertificatesController {

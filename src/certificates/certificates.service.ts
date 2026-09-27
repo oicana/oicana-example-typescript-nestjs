@@ -1,9 +1,9 @@
 import { Injectable } from '@nestjs/common';
 import { Result } from 'neverthrow';
-import { ServiceError } from 'src/serviceError';
-import { TemplatesService } from 'src/templates/templates.service';
-import { CreateCertificateDto } from './CreateCertificateDto.dto';
-import { CompilationDto } from 'src/templates/CompilationDto.dto';
+import { ServiceError } from '../serviceError.js';
+import { TemplatesService } from '../templates/templates.service.js';
+import { CreateCertificateDto } from './CreateCertificateDto.dto.js';
+import { CompilationDto } from '../templates/CompilationDto.dto.js';
 
 @Injectable()
 export class CertificatesService {

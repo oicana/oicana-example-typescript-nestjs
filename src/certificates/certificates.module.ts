@@ -1,7 +1,7 @@
 import { Module } from '@nestjs/common';
-import { CertificatesController } from './certificates.controller';
-import { CertificatesService } from './certificates.service';
-import { TemplatesModule } from 'src/templates/templates.module';
+import { CertificatesController } from './certificates.controller.js';
+import { CertificatesService } from './certificates.service.js';
+import { TemplatesModule } from '../templates/templates.module.js';
 
 @Module({
   imports: [TemplatesModule],
