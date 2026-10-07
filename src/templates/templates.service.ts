@@ -118,13 +118,15 @@ export class TemplatesService {
   }
 
   public resetTemplate(templateId: string): boolean {
-    const existed = this.templates.delete(templateId);
-    if (existed) {
-      this.logger.log(`Template '${templateId}' removed from cache`);
-    } else {
+    const template = this.templates.get(templateId);
+    if (template === undefined) {
       this.logger.error(`Template '${templateId}' not found in cache`);
+      return false;
     }
-    return existed;
+    this.templates.delete(templateId);
+    template.dispose();
+    this.logger.log(`Template '${templateId}' removed from cache`);
+    return true;
   }
 
   public getTemplateFilePath(templateId: string): string | null {
