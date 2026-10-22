@@ -3,7 +3,7 @@ import { ApiProperty } from '@nestjs/swagger';
 export class BlobInputDto {
   @ApiProperty({
     description: 'The input key name as defined in the template',
-    example: 'logo',
+    example: 'banner',
   })
   key: string;
 

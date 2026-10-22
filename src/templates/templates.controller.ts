@@ -24,7 +24,7 @@ export class TemplatesController {
     required: true,
     description:
       'Identifier for the template. Get a list of available templates with `GET /templates`.',
-    example: 'table',
+    example: 'invoice',
   })
   @ApiResponse({
     status: 200,
@@ -82,7 +82,7 @@ export class TemplatesController {
     required: true,
     description:
       'Identifier for the template. Get a list of available templates with `GET /templates`.',
-    example: 'table',
+    example: 'invoice',
   })
   @ApiResponse({
     status: 200,
